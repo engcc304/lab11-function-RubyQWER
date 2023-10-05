@@ -25,10 +25,52 @@
 */
 
 #include <stdio.h>
+#include <math.h>
+
+int cal(int base , int exponent) {
+    int result = 1 ;
+    for (int i = 0 ; i < exponent ; ++i ) {
+        result *= base ;
+    }//end for
+    return result ;
+}
+
+int ArmNumber(int number) {
+
+    int originalNumber = number ;
+    int numberOfDigits = 0 ;
+    int sum = 0 ;
+
+    while (originalNumber != 0) {
+        originalNumber /= 10 ;
+        ++numberOfDigits ;
+    }//end while
+
+    originalNumber = number ;
+
+    while (originalNumber != 0) {
+        int digit = originalNumber % 10 ;
+        sum += cal(digit , numberOfDigits) ;
+        originalNumber /= 10 ;
+    }//end while
+
+    return sum == number ;
+
+}//end function
 
 int main() {
 
-    //--| YOUR CODE HERE
+    int number ;
+
+    printf("Enter Number: ") ;
+    scanf("%d", &number) ;
+
+    if (ArmNumber(number)) {
+        printf("Pass.\n") ;
+    } 
+    else {
+        printf("Not Pass.\n") ;
+    }
 
     return 0 ;
-}//end main function
+}//end function
